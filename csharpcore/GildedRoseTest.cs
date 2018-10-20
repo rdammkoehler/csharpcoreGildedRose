@@ -5,13 +5,21 @@ namespace csharpcore
 {
     public class GildedRoseTest
     {
+        private GildedRose App { get; set; }
+        private Item[] Items { get; set; }
+        
+        private void Initialize(params Item[] Items)
+        {
+            this.Items = Items;
+            App = new GildedRose(Items);
+        }
+        
         [Fact]
         public void ctQualityCanBeNegativeIfSellInGreaterThanZero()
         {
-            IList<Item> Items = new List<Item> {new Item {Name = "foo", SellIn = 10, Quality = -1}};
-            GildedRose app = new GildedRose(Items);
-            
-            app.UpdateQuality();
+            Initialize(new Item {Name = "foo", SellIn = 10, Quality = -1});
+
+            App.UpdateQuality();
             
             Assert.Equal(-1, Items[0].Quality);
         }
@@ -19,10 +27,9 @@ namespace csharpcore
         [Fact]
         public void ctQualityDecreasesByOneEachUpdate()
         {
-            IList<Item> Items = new List<Item> {new Item {Name = "foo", SellIn = 10, Quality = 5}};
-            GildedRose app = new GildedRose(Items);
-            
-            app.UpdateQuality();
+            Initialize(new Item {Name = "foo", SellIn = 10, Quality = 5});
+
+            App.UpdateQuality();
             
             Assert.Equal(4, Items[0].Quality);            
         }
