@@ -15,5 +15,16 @@ namespace csharpcore
             
             Assert.Equal(-1, Items[0].Quality);
         }
+
+        [Fact]
+        public void ctQualityDecreasesByOneEachUpdate()
+        {
+            IList<Item> Items = new List<Item> {new Item {Name = "foo", SellIn = 10, Quality = 5}};
+            GildedRose app = new GildedRose(Items);
+            
+            app.UpdateQuality();
+            
+            Assert.Equal(4, Items[0].Quality);            
+        }
     }
 }
