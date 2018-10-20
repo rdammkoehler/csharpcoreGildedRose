@@ -1,9 +1,25 @@
 ﻿using System;
 using Xunit;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace csharpcore
 {
+    public class ItemComparer : IEqualityComparer<Item>
+    {
+        public bool Equals(Item x, Item y)
+        {
+            return x.Name == y.Name &&
+                   x.Quality == y.Quality &&
+                   x.SellIn == y.SellIn;
+        }
+
+        public int GetHashCode(Item obj)
+        {
+            return obj.GetHashCode();
+        }
+    }
+
     public class GildedRoseTest
     {
         private GildedRose App { get; set; }
@@ -59,16 +75,18 @@ namespace csharpcore
         public void ctAllItemsGetProcessed()
         {
             Initialize(
-                new Item() {Name = "foo", SellIn = 10, Quality = 10},
-                new Item {Name = "foo", SellIn = 9, Quality = 9}
+                new Item {Name = "foo", SellIn = 10, Quality = 10},
+                new Item {Name = "bar", SellIn = 9, Quality = 9}
             );
-            
+            var expected = new Item[]
+            {
+                new Item() {Name = "foo", SellIn = 9, Quality = 9},
+                new Item {Name = "bar", SellIn = 8, Quality = 8}
+            };
+
             App.UpdateQuality();
-            
-            Assert.Equal(9, Items[0].SellIn);
-            Assert.Equal(9, Items[0].Quality);
-            Assert.Equal(8, Items[1].SellIn);
-            Assert.Equal(8, Items[1].Quality);
+
+            Assert.Equal(expected, Items, new ItemComparer());
         }
     }
 }
