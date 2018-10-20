@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 using System.Collections.Generic;
 
 namespace csharpcore
@@ -52,6 +53,22 @@ namespace csharpcore
             App.UpdateQuality();
 
             Assert.Equal(9, Items[0].SellIn);
+        }
+
+        [Fact]
+        public void ctAllItemsGetProcessed()
+        {
+            Initialize(
+                new Item() {Name = "foo", SellIn = 10, Quality = 10},
+                new Item {Name = "foo", SellIn = 9, Quality = 9}
+            );
+            
+            App.UpdateQuality();
+            
+            Assert.Equal(9, Items[0].SellIn);
+            Assert.Equal(9, Items[0].Quality);
+            Assert.Equal(8, Items[1].SellIn);
+            Assert.Equal(8, Items[1].Quality);
         }
     }
 }
