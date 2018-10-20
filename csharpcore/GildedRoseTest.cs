@@ -43,5 +43,15 @@ namespace csharpcore
 
             Assert.Equal(0, Items[0].Quality);
         }
+
+        [Fact]
+        public void ctSellInReducesByOneForEachUpdate()
+        {
+            Initialize(new Item {Name = "foo", SellIn = 10, Quality = 10});
+
+            App.UpdateQuality();
+
+            Assert.Equal(9, Items[0].SellIn);
+        }
     }
 }
