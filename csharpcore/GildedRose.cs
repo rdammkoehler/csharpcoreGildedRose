@@ -68,7 +68,7 @@ namespace csharpcore
                 {
                     if (isConcertTicket(currentItem))
                     {
-                        currentItem.Quality = 0;
+                        MakeWorthless(currentItem);
                     }
                     else
                     {
@@ -76,6 +76,11 @@ namespace csharpcore
                     }
                 }
             }
+        }
+
+        private void MakeWorthless(Item currentItem)
+        {
+            currentItem.Quality = 0;
         }
 
         private bool isConcertTicket(Item currentItem)
