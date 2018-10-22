@@ -23,6 +23,7 @@ namespace csharpcore
     public class GildedRoseTest
     {
         private const string AgedBrie = "Aged Brie";
+        private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
         private GildedRose App { get; set; }
         private Item[] Items { get; set; }
 
@@ -123,8 +124,8 @@ namespace csharpcore
         [Fact]
         public void ctSulfurasNeverHasToBeSold()
         {
-            Initialize(new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 1, Quality = 80});
-            var expected = new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 1, Quality = 80};
+            Initialize(new Item {Name = SulfurasHandOfRagnaros, SellIn = 1, Quality = 80});
+            var expected = new Item {Name = SulfurasHandOfRagnaros, SellIn = 1, Quality = 80};
 
             App.UpdateQuality();
 
