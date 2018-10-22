@@ -58,10 +58,7 @@ namespace csharpcore
             }
             else
             {
-                if (currentItem.Quality > 0)
-                {
-                    currentItem.Quality--;
-                }
+                ReduceQuality(currentItem);
             }
         }
 
@@ -84,12 +81,17 @@ namespace csharpcore
                     }
                     else
                     {
-                        if (currentItem.Quality > 0)
-                        {
-                            currentItem.Quality--;
-                        }
+                        ReduceQuality(currentItem);
                     }
                 }
+            }
+        }
+
+        private void ReduceQuality(Item currentItem)
+        {
+            if (currentItem.Quality > 0)
+            {
+                currentItem.Quality--;
             }
         }
     }
