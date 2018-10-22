@@ -32,7 +32,7 @@ namespace csharpcore
         {
             if (currentItem.Name == AgedBrie || currentItem.Name == BackstagePassesToATafkal80EtcConcert)
             {
-                if (currentItem.Quality < 50)
+                if (isNotMaxQuality(currentItem))
                 {
                     currentItem.Quality++;
 
@@ -80,7 +80,7 @@ namespace csharpcore
 
         private void IncreaseQuality(Item currentItem)
         {
-            if (currentItem.Quality < 50)
+            if (isNotMaxQuality(currentItem))
             {
                 currentItem.Quality++;
             }
@@ -92,6 +92,11 @@ namespace csharpcore
             {
                 currentItem.Quality--;
             }
+        }
+
+        private bool isNotMaxQuality(Item currentItem)
+        {
+            return currentItem.Quality < 50;
         }
     }
 }
