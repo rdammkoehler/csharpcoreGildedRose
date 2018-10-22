@@ -108,5 +108,15 @@ namespace csharpcore
 
             Assert.Equal(11, Items[0].Quality);
         }
+
+        [Fact]
+        public void ctAgedBrieNeverGetsQualityMoreThan50()
+        {
+            Initialize(new Item {Name = "Aged Brie", SellIn = 10, Quality = 50});
+
+            App.UpdateQuality();
+
+            Assert.Equal(50, Items[0].Quality);
+        }
     }
 }
