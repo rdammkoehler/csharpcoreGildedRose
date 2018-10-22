@@ -4,6 +4,9 @@ namespace csharpcore
 {
     public class GildedRose
     {
+        private const string BackstagePassesToATafkal80EtcConcert = "Backstage passes to a TAFKAL80ETC concert";
+        private const string AgedBrie = "Aged Brie";
+        private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
         IList<Item> Items;
 
         public GildedRose(IList<Item> Items)
@@ -16,18 +19,18 @@ namespace csharpcore
             for (var idx = 0; idx < Items.Count; idx++)
             {
                 Item currentItem = Items[idx];
-                if (currentItem.Name == "Sulfuras, Hand of Ragnaros")
+                if (currentItem.Name == SulfurasHandOfRagnaros)
                 {
                 }
                 else
                 {
-                    if (currentItem.Name == "Aged Brie" || currentItem.Name == "Backstage passes to a TAFKAL80ETC concert")
+                    if (currentItem.Name == AgedBrie || currentItem.Name == BackstagePassesToATafkal80EtcConcert)
                     {
                         if (currentItem.Quality < 50)
                         {
                             currentItem.Quality++;
 
-                            if (currentItem.Name == "Backstage passes to a TAFKAL80ETC concert")
+                            if (currentItem.Name == BackstagePassesToATafkal80EtcConcert)
                             {
                                 if (currentItem.SellIn < 11)
                                 {
@@ -60,7 +63,7 @@ namespace csharpcore
 
                     if (currentItem.SellIn < 0)
                     {
-                        if (currentItem.Name == "Aged Brie")
+                        if (currentItem.Name == AgedBrie)
                         {
                             if (currentItem.Quality < 50)
                             {
@@ -69,7 +72,7 @@ namespace csharpcore
                         }
                         else
                         {
-                            if (currentItem.Name == "Backstage passes to a TAFKAL80ETC concert")
+                            if (currentItem.Name == BackstagePassesToATafkal80EtcConcert)
                             {
                                 currentItem.Quality = 0;
                             }
