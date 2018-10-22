@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace csharpcore
 {
@@ -16,19 +17,14 @@ namespace csharpcore
 
         public void UpdateQuality()
         {
-            foreach (Item currentItem in Items)
+            var nonLegendaryItems = Items.Where(item => item.Name != SulfurasHandOfRagnaros);
+            foreach (Item currentItem in nonLegendaryItems)
             {
-                if (currentItem.Name == SulfurasHandOfRagnaros)
-                {
-                }
-                else
-                {
-                    PreprocessItemQuality(currentItem);
+                PreprocessItemQuality(currentItem);
 
-                    currentItem.SellIn--;
+                currentItem.SellIn--;
 
-                    PostprocessItemQuality(currentItem);
-                }
+                PostprocessItemQuality(currentItem);
             }
         }
 
