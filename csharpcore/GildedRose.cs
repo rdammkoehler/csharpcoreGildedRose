@@ -24,65 +24,74 @@ namespace csharpcore
                 }
                 else
                 {
-                    if (currentItem.Name == AgedBrie || currentItem.Name == BackstagePassesToATafkal80EtcConcert)
-                    {
-                        if (currentItem.Quality < 50)
-                        {
-                            currentItem.Quality++;
-
-                            if (currentItem.Name == BackstagePassesToATafkal80EtcConcert)
-                            {
-                                if (currentItem.SellIn < 11)
-                                {
-                                    if (currentItem.Quality < 50)
-                                    {
-                                        currentItem.Quality++;
-                                    }
-                                }
-
-                                if (currentItem.SellIn < 6)
-                                {
-                                    if (currentItem.Quality < 50)
-                                    {
-                                        currentItem.Quality++;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (currentItem.Quality > 0)
-                        {
-                            currentItem.Quality--;
-                        }
-                    }
-
+                    PreprocessItemQuality(currentItem);
 
                     currentItem.SellIn--;
 
-                    if (currentItem.SellIn < 0)
+                    PostprocessItemQuality(currentItem);
+                }
+            }
+        }
+
+        private void PreprocessItemQuality(Item currentItem)
+        {
+            if (currentItem.Name == AgedBrie || currentItem.Name == BackstagePassesToATafkal80EtcConcert)
+            {
+                if (currentItem.Quality < 50)
+                {
+                    currentItem.Quality++;
+
+                    if (currentItem.Name == BackstagePassesToATafkal80EtcConcert)
                     {
-                        if (currentItem.Name == AgedBrie)
+                        if (currentItem.SellIn < 11)
                         {
                             if (currentItem.Quality < 50)
                             {
                                 currentItem.Quality++;
                             }
                         }
-                        else
+
+                        if (currentItem.SellIn < 6)
                         {
-                            if (currentItem.Name == BackstagePassesToATafkal80EtcConcert)
+                            if (currentItem.Quality < 50)
                             {
-                                currentItem.Quality = 0;
+                                currentItem.Quality++;
                             }
-                            else
-                            {
-                                if (currentItem.Quality > 0)
-                                {
-                                    currentItem.Quality--;
-                                }
-                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (currentItem.Quality > 0)
+                {
+                    currentItem.Quality--;
+                }
+            }
+        }
+
+        private void PostprocessItemQuality(Item currentItem)
+        {
+            if (currentItem.SellIn < 0)
+            {
+                if (currentItem.Name == AgedBrie)
+                {
+                    if (currentItem.Quality < 50)
+                    {
+                        currentItem.Quality++;
+                    }
+                }
+                else
+                {
+                    if (currentItem.Name == BackstagePassesToATafkal80EtcConcert)
+                    {
+                        currentItem.Quality = 0;
+                    }
+                    else
+                    {
+                        if (currentItem.Quality > 0)
+                        {
+                            currentItem.Quality--;
                         }
                     }
                 }
