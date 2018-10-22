@@ -20,7 +20,7 @@ namespace csharpcore
         }
     }
 
-    public class GildedRoseTest
+    public class GildedRoseTest    
     {
         private const string AgedBrie = "Aged Brie";
         private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
@@ -134,7 +134,7 @@ namespace csharpcore
         }
 
         [Fact]
-        public void ctBackstagePassesIncreaseInValue()
+        public void ctBackstagePassesIncreaseInQuality()
         {
             Initialize(new Item {Name = BackstagePassesToATafkal80EtcConcert, SellIn = 30, Quality = 40});
             var expected = new Item {Name = BackstagePassesToATafkal80EtcConcert, SellIn = 29, Quality = 41};
@@ -156,7 +156,7 @@ namespace csharpcore
         }
 
         [Fact]
-        public void ctBackstagePassesIncreaseInValueByTwoWhen10DaysFromSellIn()
+        public void ctBackstagePassesIncreaseInQualityByTwoWhen10DaysFromSellIn()
         {
             Initialize(new Item {Name = BackstagePassesToATafkal80EtcConcert, SellIn = 10, Quality = 40});
             var expected = new Item {Name = BackstagePassesToATafkal80EtcConcert, SellIn = 9, Quality = 42};
@@ -167,7 +167,7 @@ namespace csharpcore
         }
 
         [Fact]
-        public void ctBackstagePassesIncreaseInValueByThreeWhen5DaysFromSellIn()
+        public void ctBackstagePassesIncreaseInQualityByThreeWhen5DaysFromSellIn()
         {
             Initialize(new Item {Name = BackstagePassesToATafkal80EtcConcert, SellIn = 5, Quality = 40});
             var expected = new Item {Name = BackstagePassesToATafkal80EtcConcert, SellIn = 4, Quality = 43};
