@@ -165,5 +165,16 @@ namespace csharpcore
 
             Assert.Equal(expected, Items[0], new ItemComparer());
         }
+
+        [Fact]
+        public void ctBackstagePassesIncreaseInValueByThreeWhen5DaysFromSellIn()
+        {
+            Initialize(new Item {Name = BackstagePassesToATafkal80EtcConcert, SellIn = 5, Quality = 40});
+            var expected = new Item {Name = BackstagePassesToATafkal80EtcConcert, SellIn = 4, Quality = 43};
+
+            App.UpdateQuality();
+
+            Assert.Equal(expected, Items[0], new ItemComparer());
+        }
     }
 }
