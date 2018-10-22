@@ -34,7 +34,7 @@ namespace csharpcore
             {
                 if (IsNotMaxQuality(currentItem))
                 {
-                    currentItem.Quality++;
+                    ChangeQuality(currentItem, 1);
 
                     if (IsConcertTicket(currentItem))
                     {
@@ -103,7 +103,7 @@ namespace csharpcore
         {
             if (IsNotMaxQuality(currentItem))
             {
-                currentItem.Quality++;
+                ChangeQuality(currentItem, 1);
             }
         }
 
@@ -111,8 +111,13 @@ namespace csharpcore
         {
             if (currentItem.Quality > 0)
             {
-                currentItem.Quality--;
+                ChangeQuality(currentItem, -1);
             }
+        }
+
+        private void ChangeQuality(Item currentItem, int delta)
+        {
+            currentItem.Quality += delta;
         }
 
         private bool IsNotMaxQuality(Item currentItem)
