@@ -13,9 +13,9 @@ namespace csharpcore
 
         public void UpdateQuality()
         {
-            for (var i = 0; i < Items.Count; i++)
+            for (var idx = 0; idx < Items.Count; idx++)
             {
-                Item currentItem = Items[i];
+                Item currentItem = Items[idx];
                 if (currentItem.Name == "Sulfuras, Hand of Ragnaros")
                 {
                 }
