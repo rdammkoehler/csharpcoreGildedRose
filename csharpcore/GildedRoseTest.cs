@@ -219,5 +219,15 @@ namespace csharpcore
 
             Assert.Equal(1, Items[0].SellIn);
         }
+
+        [Fact]
+        public void ctSulfurasQualityDoesNotChange()
+        {
+            Initialize(new Item {Name = SulfurasHandOfRagnaros, SellIn = 1, Quality = 200});
+
+            App.UpdateQuality();
+
+            Assert.Equal(200, Items[0].Quality);
+        }
     }
 }
