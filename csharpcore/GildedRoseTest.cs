@@ -119,5 +119,16 @@ namespace csharpcore
 
             Assert.Equal(50, Items[0].Quality);
         }
+
+        [Fact]
+        public void ctSulfurasNeverHasToBeSold()
+        {
+            Initialize(new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 1, Quality = 80});
+            var expected = new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 1, Quality = 80};
+
+            App.UpdateQuality();
+
+            Assert.Equal(expected, Items[0], new ItemComparer());
+        }
     }
 }
