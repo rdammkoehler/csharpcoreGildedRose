@@ -143,5 +143,16 @@ namespace csharpcore
 
             Assert.Equal(expected, Items[0], new ItemComparer());
         }
+
+        [Fact]
+        public void ctBackstagePassesCannotHaveQualityOver50()
+        {
+            Initialize(new Item {Name = BackstagePassesToATafkal80EtcConcert, SellIn = 3, Quality = 50});
+            var expected = new Item {Name = BackstagePassesToATafkal80EtcConcert, SellIn = 2, Quality = 50};
+
+            App.UpdateQuality();
+
+            Assert.Equal(expected, Items[0], new ItemComparer());
+        }
     }
 }
