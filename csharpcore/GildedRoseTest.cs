@@ -88,5 +88,15 @@ namespace csharpcore
 
             Assert.Equal(expected, Items, new ItemComparer());
         }
+
+        [Fact]
+        public void ctQualityDegradesTwiceAsFastAfterSellInDate()
+        {
+            Initialize(new Item{Name="foo", SellIn=0, Quality=10});
+            
+            App.UpdateQuality();
+            
+            Assert.Equal(8, Items[0].Quality);
+        }
     }
 }
