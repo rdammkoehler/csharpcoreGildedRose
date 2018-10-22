@@ -30,13 +30,13 @@ namespace csharpcore
 
         private void PreprocessItemQuality(Item currentItem)
         {
-            if (currentItem.Name == AgedBrie || currentItem.Name == BackstagePassesToATafkal80EtcConcert)
+            if (isAgedBrie(currentItem) || isConcertTicket(currentItem))
             {
                 if (isNotMaxQuality(currentItem))
                 {
                     currentItem.Quality++;
 
-                    if (currentItem.Name == BackstagePassesToATafkal80EtcConcert)
+                    if (isConcertTicket(currentItem))
                     {
                         if (currentItem.SellIn < 11)
                         {
@@ -60,13 +60,13 @@ namespace csharpcore
         {
             if (isExpired(currentItem))
             {
-                if (currentItem.Name == AgedBrie)
+                if (isAgedBrie(currentItem))
                 {
                     IncreaseQuality(currentItem);
                 }
                 else
                 {
-                    if (currentItem.Name == BackstagePassesToATafkal80EtcConcert)
+                    if (isConcertTicket(currentItem))
                     {
                         currentItem.Quality = 0;
                     }
@@ -77,6 +77,17 @@ namespace csharpcore
                 }
             }
         }
+
+        private bool isConcertTicket(Item currentItem)
+        {
+            return currentItem.Name == BackstagePassesToATafkal80EtcConcert;
+        }
+
+        private bool isAgedBrie(Item currentItem)
+        {
+            return currentItem.Name == AgedBrie;
+        }
+
 
         private bool isExpired(Item currentItem)
         {
