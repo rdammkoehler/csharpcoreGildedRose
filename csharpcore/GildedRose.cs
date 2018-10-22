@@ -58,7 +58,7 @@ namespace csharpcore
 
         private void PostprocessItemQuality(Item currentItem)
         {
-            if (currentItem.SellIn < 0)
+            if (isExpired(currentItem))
             {
                 if (currentItem.Name == AgedBrie)
                 {
@@ -76,6 +76,11 @@ namespace csharpcore
                     }
                 }
             }
+        }
+
+        private bool isExpired(Item currentItem)
+        {
+            return currentItem.SellIn < 0;
         }
 
         private void IncreaseQuality(Item currentItem)
