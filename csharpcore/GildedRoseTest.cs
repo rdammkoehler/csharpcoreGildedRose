@@ -92,11 +92,21 @@ namespace csharpcore
         [Fact]
         public void ctQualityDegradesTwiceAsFastAfterSellInDate()
         {
-            Initialize(new Item{Name="foo", SellIn=0, Quality=10});
-            
+            Initialize(new Item {Name = "foo", SellIn = 0, Quality = 10});
+
             App.UpdateQuality();
-            
+
             Assert.Equal(8, Items[0].Quality);
+        }
+
+        [Fact]
+        public void ctAgedBrieIncreasesInQualityWithAge()
+        {
+            Initialize(new Item {Name = "Aged Brie", SellIn = 10, Quality = 10});
+
+            App.UpdateQuality();
+
+            Assert.Equal(11, Items[0].Quality);
         }
     }
 }
