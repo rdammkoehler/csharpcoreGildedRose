@@ -22,6 +22,7 @@ namespace csharpcore
 
     public class GildedRoseTest
     {
+        private const string AgedBrie = "Aged Brie";
         private GildedRose App { get; set; }
         private Item[] Items { get; set; }
 
@@ -102,7 +103,7 @@ namespace csharpcore
         [Fact]
         public void ctAgedBrieIncreasesInQualityWithAge()
         {
-            Initialize(new Item {Name = "Aged Brie", SellIn = 10, Quality = 10});
+            Initialize(new Item {Name = AgedBrie, SellIn = 10, Quality = 10});
 
             App.UpdateQuality();
 
@@ -112,7 +113,7 @@ namespace csharpcore
         [Fact]
         public void ctAgedBrieNeverGetsQualityMoreThan50()
         {
-            Initialize(new Item {Name = "Aged Brie", SellIn = 10, Quality = 50});
+            Initialize(new Item {Name = AgedBrie, SellIn = 10, Quality = 50});
 
             App.UpdateQuality();
 
