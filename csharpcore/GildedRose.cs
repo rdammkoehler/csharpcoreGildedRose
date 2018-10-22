@@ -30,13 +30,13 @@ namespace csharpcore
 
         private void PreprocessItemQuality(Item currentItem)
         {
-            if (isAgedBrie(currentItem) || isConcertTicket(currentItem))
+            if (IsAgedBrie(currentItem) || IsConcertTicket(currentItem))
             {
-                if (isNotMaxQuality(currentItem))
+                if (IsNotMaxQuality(currentItem))
                 {
                     currentItem.Quality++;
 
-                    if (isConcertTicket(currentItem))
+                    if (IsConcertTicket(currentItem))
                     {
                         if (currentItem.SellIn < 11)
                         {
@@ -58,15 +58,15 @@ namespace csharpcore
 
         private void PostprocessItemQuality(Item currentItem)
         {
-            if (isExpired(currentItem))
+            if (IsExpired(currentItem))
             {
-                if (isAgedBrie(currentItem))
+                if (IsAgedBrie(currentItem))
                 {
                     IncreaseQuality(currentItem);
                 }
                 else
                 {
-                    if (isConcertTicket(currentItem))
+                    if (IsConcertTicket(currentItem))
                     {
                         MakeWorthless(currentItem);
                     }
@@ -83,25 +83,25 @@ namespace csharpcore
             currentItem.Quality = 0;
         }
 
-        private bool isConcertTicket(Item currentItem)
+        private bool IsConcertTicket(Item currentItem)
         {
             return currentItem.Name == BackstagePassesToATafkal80EtcConcert;
         }
 
-        private bool isAgedBrie(Item currentItem)
+        private bool IsAgedBrie(Item currentItem)
         {
             return currentItem.Name == AgedBrie;
         }
 
 
-        private bool isExpired(Item currentItem)
+        private bool IsExpired(Item currentItem)
         {
             return currentItem.SellIn < 0;
         }
 
         private void IncreaseQuality(Item currentItem)
         {
-            if (isNotMaxQuality(currentItem))
+            if (IsNotMaxQuality(currentItem))
             {
                 currentItem.Quality++;
             }
@@ -115,7 +115,7 @@ namespace csharpcore
             }
         }
 
-        private bool isNotMaxQuality(Item currentItem)
+        private bool IsNotMaxQuality(Item currentItem)
         {
             return currentItem.Quality < 50;
         }
