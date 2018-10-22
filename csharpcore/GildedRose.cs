@@ -40,18 +40,12 @@ namespace csharpcore
                     {
                         if (currentItem.SellIn < 11)
                         {
-                            if (currentItem.Quality < 50)
-                            {
-                                currentItem.Quality++;
-                            }
+                            IncreaseQuality(currentItem);
                         }
 
                         if (currentItem.SellIn < 6)
                         {
-                            if (currentItem.Quality < 50)
-                            {
-                                currentItem.Quality++;
-                            }
+                            IncreaseQuality(currentItem);
                         }
                     }
                 }
@@ -68,10 +62,7 @@ namespace csharpcore
             {
                 if (currentItem.Name == AgedBrie)
                 {
-                    if (currentItem.Quality < 50)
-                    {
-                        currentItem.Quality++;
-                    }
+                    IncreaseQuality(currentItem);
                 }
                 else
                 {
@@ -84,6 +75,14 @@ namespace csharpcore
                         ReduceQuality(currentItem);
                     }
                 }
+            }
+        }
+
+        private void IncreaseQuality(Item currentItem)
+        {
+            if (currentItem.Quality < 50)
+            {
+                currentItem.Quality++;
             }
         }
 
