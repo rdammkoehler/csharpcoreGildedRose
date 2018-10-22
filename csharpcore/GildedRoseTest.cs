@@ -20,7 +20,7 @@ namespace csharpcore
         }
     }
 
-    public class GildedRoseTest    
+    public class GildedRoseTest
     {
         private const string AgedBrie = "Aged Brie";
         private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
@@ -187,5 +187,17 @@ namespace csharpcore
 
             Assert.Equal(expected, Items[0], new ItemComparer());
         }
+
+        [Fact]
+        public void ctBackstagePassesCannotExceedQualityOf50EvenWhen10DaysFromSellIn()
+        {
+            Initialize(new Item {Name = BackstagePassesToATafkal80EtcConcert, SellIn = 10, Quality = 49});
+            var expected = new Item {Name = BackstagePassesToATafkal80EtcConcert, SellIn = 9, Quality = 50};
+
+            App.UpdateQuality();
+
+            Assert.Equal(expected, Items[0], new ItemComparer());
+        }
+        
     }
 }
