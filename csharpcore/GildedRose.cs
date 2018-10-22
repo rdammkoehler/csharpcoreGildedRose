@@ -22,7 +22,7 @@ namespace csharpcore
             {
                 PreprocessItemQuality(currentItem);
 
-                currentItem.SellIn--;
+                ReduceSellIn(currentItem);
 
                 PostprocessItemQuality(currentItem);
             }
@@ -76,6 +76,11 @@ namespace csharpcore
                     }
                 }
             }
+        }
+
+        private void ReduceSellIn(Item currentItem)
+        {
+            currentItem.SellIn--;
         }
 
         private void MakeWorthless(Item currentItem)
