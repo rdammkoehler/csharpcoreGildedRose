@@ -24,6 +24,7 @@ namespace csharpcore
     {
         private const string AgedBrie = "Aged Brie";
         private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
+        private const string BackstagePassesToATafkal80EtcConcert = "Backstage passes to a TAFKAL80ETC concert";
         private GildedRose App { get; set; }
         private Item[] Items { get; set; }
 
@@ -126,6 +127,17 @@ namespace csharpcore
         {
             Initialize(new Item {Name = SulfurasHandOfRagnaros, SellIn = 1, Quality = 80});
             var expected = new Item {Name = SulfurasHandOfRagnaros, SellIn = 1, Quality = 80};
+
+            App.UpdateQuality();
+
+            Assert.Equal(expected, Items[0], new ItemComparer());
+        }
+
+        [Fact]
+        public void ctBackstagePassesIncreaseInValue()
+        {
+            Initialize(new Item {Name = BackstagePassesToATafkal80EtcConcert, SellIn = 30, Quality = 40});
+            var expected = new Item {Name = BackstagePassesToATafkal80EtcConcert, SellIn = 29, Quality = 41};
 
             App.UpdateQuality();
 
