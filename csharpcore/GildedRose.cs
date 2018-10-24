@@ -72,16 +72,13 @@ namespace csharpcore
                     {
                         IncreaseQuality();
                     }
+                    else if (IsConcertTicket())
+                    {
+                        MakeWorthless();
+                    }
                     else
                     {
-                        if (IsConcertTicket())
-                        {
-                            MakeWorthless();
-                        }
-                        else
-                        {
-                            ReduceQuality();
-                        }
+                        ReduceQuality();
                     }
                 }
             }
