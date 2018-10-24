@@ -10,7 +10,7 @@ namespace csharpcore
         private const string ConjuredManaCake = "Conjured Mana Cake";
         private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
         private readonly IList<Item> _items;
-        private readonly ItemProcessor _itemAdjuster = new ItemProcessor();
+        private readonly ItemAdjuster _itemAdjuster = new ItemAdjuster();
 
         public GildedRose(IList<Item> items)
         {
@@ -25,7 +25,7 @@ namespace csharpcore
                 .ForEach(item => _itemAdjuster.UpdateItem(item));
         }
 
-        private class ItemProcessor
+        private class ItemAdjuster
         {
             private Item _currentItem = null;
 
