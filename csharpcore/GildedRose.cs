@@ -9,29 +9,29 @@ namespace csharpcore
         private const string BackstagePassesToATafkal80EtcConcert = "Backstage passes to a TAFKAL80ETC concert";
         private const string ConjuredManaCake = "Conjured Mana Cake";
         private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
-        private readonly IList<Item> Items;
-        private readonly ItemProcessor ItemAdjuster = new ItemProcessor();
+        private readonly IList<Item> _items;
+        private readonly ItemProcessor _itemAdjuster = new ItemProcessor();
 
-        public GildedRose(IList<Item> Items)
+        public GildedRose(IList<Item> items)
         {
-            this.Items = Items;
+            this._items = items;
         }
 
         public void UpdateQuality()
         {
-            Items
+            _items
                 .Where(item => item.Name != SulfurasHandOfRagnaros)
                 .ToList()
-                .ForEach(currentItem => ItemAdjuster.UpdateItem(currentItem));
+                .ForEach(item => _itemAdjuster.UpdateItem(item));
         }
 
         private class ItemProcessor
         {
-            private Item currentItem = null;
+            private Item _currentItem = null;
 
             public void UpdateItem(Item item)
             {
-                currentItem = item;
+                _currentItem = item;
 
                 PreProcessItemQuality();
 
@@ -95,43 +95,43 @@ namespace csharpcore
 
             private bool IsExpiredInFiveDays()
             {
-                return currentItem.SellIn < 6;
+                return _currentItem.SellIn < 6;
             }
 
             private bool IsExpiredInTenDays()
             {
-                return currentItem.SellIn < 11;
+                return _currentItem.SellIn < 11;
             }
 
             private void ReduceSellIn()
             {
-                currentItem.SellIn--;
+                _currentItem.SellIn--;
             }
 
             private void MakeWorthless()
             {
-                currentItem.Quality = 0;
+                _currentItem.Quality = 0;
             }
 
             private bool IsConjuredManaCake()
             {
-                return currentItem.Name == ConjuredManaCake;
+                return _currentItem.Name == ConjuredManaCake;
             }
 
             private bool IsConcertTicket()
             {
-                return currentItem.Name == BackstagePassesToATafkal80EtcConcert;
+                return _currentItem.Name == BackstagePassesToATafkal80EtcConcert;
             }
 
             private bool IsAgedBrie()
             {
-                return currentItem.Name == AgedBrie;
+                return _currentItem.Name == AgedBrie;
             }
 
 
             private bool IsExpired()
             {
-                return currentItem.SellIn < 0;
+                return _currentItem.SellIn < 0;
             }
 
             private void IncreaseQuality()
@@ -152,17 +152,17 @@ namespace csharpcore
 
             private void ChangeQuality(int delta)
             {
-                currentItem.Quality += delta;
+                _currentItem.Quality += delta;
             }
 
             private bool IsNotMaxQuality()
             {
-                return currentItem.Quality < 50;
+                return _currentItem.Quality < 50;
             }
 
             private bool IsNotMinQuality()
             {
-                return currentItem.Quality > 0;
+                return _currentItem.Quality > 0;
             }
         }
     }
