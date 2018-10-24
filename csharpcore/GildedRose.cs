@@ -43,21 +43,18 @@ namespace csharpcore
             {
                 if (IsAgedBrie() || IsConcertTicket())
                 {
-                    if (IsNotMaxQuality())
+                    IncreaseQuality();
+
+                    if (IsConcertTicket())
                     {
-                        ChangeQuality(1);
-
-                        if (IsConcertTicket())
+                        if (currentItem.SellIn < 11)
                         {
-                            if (currentItem.SellIn < 11)
-                            {
-                                IncreaseQuality();
-                            }
+                            IncreaseQuality();
+                        }
 
-                            if (currentItem.SellIn < 6)
-                            {
-                                IncreaseQuality();
-                            }
+                        if (currentItem.SellIn < 6)
+                        {
+                            IncreaseQuality();
                         }
                     }
                 }
