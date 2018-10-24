@@ -9,7 +9,7 @@ namespace csharpcore
         private const string BackstagePassesToATafkal80EtcConcert = "Backstage passes to a TAFKAL80ETC concert";
         private const string ConjuredManaCake = "Conjured Mana Cake";
         private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
-        IList<Item> Items;
+        private IList<Item> Items;
         private ItemProcessor itemProcessor = new ItemProcessor();
 
         public GildedRose(IList<Item> Items)
