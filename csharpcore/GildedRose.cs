@@ -82,15 +82,25 @@ namespace csharpcore
 
             private void ApplyPopularDemandQualityModifier()
             {
-                if (currentItem.SellIn < 11)
+                if (IsExpiredInTenDays())
                 {
                     IncreaseQuality();
                 }
 
-                if (currentItem.SellIn < 6)
+                if (IsExpiredInFiveDays())
                 {
                     IncreaseQuality();
                 }
+            }
+
+            private bool IsExpiredInFiveDays()
+            {
+                return currentItem.SellIn < 6;
+            }
+
+            private bool IsExpiredInTenDays()
+            {
+                return currentItem.SellIn < 11;
             }
 
             private void ReduceSellIn()
