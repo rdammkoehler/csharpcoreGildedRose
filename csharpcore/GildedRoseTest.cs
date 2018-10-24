@@ -23,8 +23,9 @@ namespace csharpcore
     public class GildedRoseTest
     {
         private const string AgedBrie = "Aged Brie";
-        private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
         private const string BackstagePassesToATafkal80EtcConcert = "Backstage passes to a TAFKAL80ETC concert";
+        private const string ConjuredManaCake = "Conjured Mana Cake";
+        private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
         private GildedRose App { get; set; }
         private Item[] Items { get; set; }
 
@@ -228,6 +229,16 @@ namespace csharpcore
             App.UpdateQuality();
 
             Assert.Equal(200, Items[0].Quality);
+        }
+
+        [Fact]
+        public void ConjuredItemsDegradeTwiceAsFastAsNormal()
+        {
+            Initialize(new Item() {Name = ConjuredManaCake, SellIn = 1, Quality = 2});
+
+            App.UpdateQuality();
+
+            Assert.Equal(0, Items[0].Quality);
         }
     }
 }

@@ -5,8 +5,9 @@ namespace csharpcore
 {
     public class GildedRose
     {
-        private const string BackstagePassesToATafkal80EtcConcert = "Backstage passes to a TAFKAL80ETC concert";
         private const string AgedBrie = "Aged Brie";
+        private const string BackstagePassesToATafkal80EtcConcert = "Backstage passes to a TAFKAL80ETC concert";
+        private const string ConjuredManaCake = "Conjured Mana Cake";
         private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
         IList<Item> Items;
         private ItemProcessor itemProcessor = new ItemProcessor();
@@ -53,6 +54,10 @@ namespace csharpcore
                 else
                 {
                     ReduceQuality();
+                    if (IsConjuredManaCake())
+                    {
+                        ReduceQuality();
+                    }
                 }
             }
 
@@ -74,7 +79,7 @@ namespace csharpcore
                     }
                 }
             }
-            
+
             private void ApplyPopularDemandQualityModifier()
             {
                 if (currentItem.SellIn < 11)
@@ -86,7 +91,7 @@ namespace csharpcore
                 {
                     IncreaseQuality();
                 }
-            }            
+            }
 
             private void ReduceSellIn()
             {
@@ -96,6 +101,11 @@ namespace csharpcore
             private void MakeWorthless()
             {
                 currentItem.Quality = 0;
+            }
+
+            private bool IsConjuredManaCake()
+            {
+                return currentItem.Name == ConjuredManaCake;
             }
 
             private bool IsConcertTicket()
