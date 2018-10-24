@@ -9,6 +9,7 @@ namespace csharpcore
         private const string AgedBrie = "Aged Brie";
         private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
         IList<Item> Items;
+        private ItemProcessor itemProcessor = new ItemProcessor();
 
         public GildedRose(IList<Item> Items)
         {
@@ -17,117 +18,128 @@ namespace csharpcore
 
         public void UpdateQuality()
         {
-            var nonLegendaryItems = Items.Where(item => item.Name != SulfurasHandOfRagnaros);
-            foreach (Item currentItem in nonLegendaryItems)
-            {
-                PreprocessItemQuality(currentItem);
-
-                ReduceSellIn(currentItem);
-
-                PostprocessItemQuality(currentItem);
-            }
+            Items
+                .Where(item => item.Name != SulfurasHandOfRagnaros)
+                .ToList()
+                .ForEach(currentItem => itemProcessor.UpdateItem(currentItem));
         }
 
-        private void PreprocessItemQuality(Item currentItem)
+        class ItemProcessor
         {
-            if (IsAgedBrie(currentItem) || IsConcertTicket(currentItem))
+            private Item currentItem = null;
+
+            public void UpdateItem(Item item)
             {
-                if (IsNotMaxQuality(currentItem))
+                currentItem = item;
+
+                PreprocessItemQuality();
+
+                ReduceSellIn();
+
+                PostprocessItemQuality();
+            }
+
+            private void PreprocessItemQuality()
+            {
+                if (IsAgedBrie() || IsConcertTicket())
                 {
-                    ChangeQuality(currentItem, 1);
-
-                    if (IsConcertTicket(currentItem))
+                    if (IsNotMaxQuality())
                     {
-                        if (currentItem.SellIn < 11)
-                        {
-                            IncreaseQuality(currentItem);
-                        }
+                        ChangeQuality(1);
 
-                        if (currentItem.SellIn < 6)
+                        if (IsConcertTicket())
                         {
-                            IncreaseQuality(currentItem);
+                            if (currentItem.SellIn < 11)
+                            {
+                                IncreaseQuality();
+                            }
+
+                            if (currentItem.SellIn < 6)
+                            {
+                                IncreaseQuality();
+                            }
                         }
                     }
-                }
-            }
-            else
-            {
-                ReduceQuality(currentItem);
-            }
-        }
-
-        private void PostprocessItemQuality(Item currentItem)
-        {
-            if (IsExpired(currentItem))
-            {
-                if (IsAgedBrie(currentItem))
-                {
-                    IncreaseQuality(currentItem);
                 }
                 else
                 {
-                    if (IsConcertTicket(currentItem))
+                    ReduceQuality();
+                }
+            }
+
+            private void PostprocessItemQuality()
+            {
+                if (IsExpired())
+                {
+                    if (IsAgedBrie())
                     {
-                        MakeWorthless(currentItem);
+                        IncreaseQuality();
                     }
                     else
                     {
-                        ReduceQuality(currentItem);
+                        if (IsConcertTicket())
+                        {
+                            MakeWorthless();
+                        }
+                        else
+                        {
+                            ReduceQuality();
+                        }
                     }
                 }
             }
-        }
 
-        private void ReduceSellIn(Item currentItem)
-        {
-            currentItem.SellIn--;
-        }
-
-        private void MakeWorthless(Item currentItem)
-        {
-            currentItem.Quality = 0;
-        }
-
-        private bool IsConcertTicket(Item currentItem)
-        {
-            return currentItem.Name == BackstagePassesToATafkal80EtcConcert;
-        }
-
-        private bool IsAgedBrie(Item currentItem)
-        {
-            return currentItem.Name == AgedBrie;
-        }
-
-
-        private bool IsExpired(Item currentItem)
-        {
-            return currentItem.SellIn < 0;
-        }
-
-        private void IncreaseQuality(Item currentItem)
-        {
-            if (IsNotMaxQuality(currentItem))
+            private void ReduceSellIn()
             {
-                ChangeQuality(currentItem, 1);
+                currentItem.SellIn--;
             }
-        }
 
-        private void ReduceQuality(Item currentItem)
-        {
-            if (currentItem.Quality > 0)
+            private void MakeWorthless()
             {
-                ChangeQuality(currentItem, -1);
+                currentItem.Quality = 0;
             }
-        }
 
-        private void ChangeQuality(Item currentItem, int delta)
-        {
-            currentItem.Quality += delta;
-        }
+            private bool IsConcertTicket()
+            {
+                return currentItem.Name == BackstagePassesToATafkal80EtcConcert;
+            }
 
-        private bool IsNotMaxQuality(Item currentItem)
-        {
-            return currentItem.Quality < 50;
+            private bool IsAgedBrie()
+            {
+                return currentItem.Name == AgedBrie;
+            }
+
+
+            private bool IsExpired()
+            {
+                return currentItem.SellIn < 0;
+            }
+
+            private void IncreaseQuality()
+            {
+                if (IsNotMaxQuality())
+                {
+                    ChangeQuality(1);
+                }
+            }
+
+            private void ReduceQuality()
+            {
+                if (currentItem.Quality > 0)
+                {
+                    ChangeQuality(-1);
+                }
+            }
+
+            private void ChangeQuality(int delta)
+            {
+                currentItem.Quality += delta;
+            }
+
+            private bool IsNotMaxQuality()
+            {
+                return currentItem.Quality < 50;
+            }
         }
     }
 }
