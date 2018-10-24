@@ -29,10 +29,10 @@ namespace csharpcore
         private GildedRose App { get; set; }
         private Item[] Items { get; set; }
 
-        private void Initialize(params Item[] Items)
+        private void Initialize(params Item[] items)
         {
-            this.Items = Items;
-            App = new GildedRose(Items);
+            Items = items;
+            App = new GildedRose(items);
         }
 
         [Fact]
