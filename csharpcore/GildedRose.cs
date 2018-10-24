@@ -10,7 +10,7 @@ namespace csharpcore
         private const string ConjuredManaCake = "Conjured Mana Cake";
         private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
         private IList<Item> Items;
-        private ItemProcessor itemProcessor = new ItemProcessor();
+        private ItemProcessor ItemAdjuster = new ItemProcessor();
 
         public GildedRose(IList<Item> Items)
         {
@@ -22,7 +22,7 @@ namespace csharpcore
             Items
                 .Where(item => item.Name != SulfurasHandOfRagnaros)
                 .ToList()
-                .ForEach(currentItem => itemProcessor.UpdateItem(currentItem));
+                .ForEach(currentItem => ItemAdjuster.UpdateItem(currentItem));
         }
 
         private class ItemProcessor
