@@ -25,7 +25,7 @@ namespace csharpcore
                 .ForEach(currentItem => itemProcessor.UpdateItem(currentItem));
         }
 
-        class ItemProcessor
+        private class ItemProcessor
         {
             private Item currentItem = null;
 
