@@ -47,15 +47,7 @@ namespace csharpcore
 
                     if (IsConcertTicket())
                     {
-                        if (currentItem.SellIn < 11)
-                        {
-                            IncreaseQuality();
-                        }
-
-                        if (currentItem.SellIn < 6)
-                        {
-                            IncreaseQuality();
-                        }
+                        ApplyPopularDemandQualityModifier();
                     }
                 }
                 else
@@ -82,6 +74,19 @@ namespace csharpcore
                     }
                 }
             }
+            
+            private void ApplyPopularDemandQualityModifier()
+            {
+                if (currentItem.SellIn < 11)
+                {
+                    IncreaseQuality();
+                }
+
+                if (currentItem.SellIn < 6)
+                {
+                    IncreaseQuality();
+                }
+            }            
 
             private void ReduceSellIn()
             {
