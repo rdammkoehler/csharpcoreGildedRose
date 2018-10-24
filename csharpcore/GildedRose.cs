@@ -134,7 +134,7 @@ namespace csharpcore
 
             private void ReduceQuality()
             {
-                if (currentItem.Quality > 0)
+                if (IsNotMinQuality())
                 {
                     ChangeQuality(-1);
                 }
@@ -148,6 +148,11 @@ namespace csharpcore
             private bool IsNotMaxQuality()
             {
                 return currentItem.Quality < 50;
+            }
+
+            private bool IsNotMinQuality()
+            {
+                return currentItem.Quality > 0;
             }
         }
     }
