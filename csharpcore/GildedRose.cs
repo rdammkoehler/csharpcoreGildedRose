@@ -33,14 +33,14 @@ namespace csharpcore
             {
                 currentItem = item;
 
-                PreprocessItemQuality();
+                PreProcessItemQuality();
 
                 ReduceSellIn();
 
-                PostprocessItemQuality();
+                PostProcessItemQuality();
             }
 
-            private void PreprocessItemQuality()
+            private void PreProcessItemQuality()
             {
                 if (IsAgedBrie() || IsConcertTicket())
                 {
@@ -61,7 +61,7 @@ namespace csharpcore
                 }
             }
 
-            private void PostprocessItemQuality()
+            private void PostProcessItemQuality()
             {
                 if (IsExpired())
                 {
